@@ -40,6 +40,27 @@ model User {
   role           Role      @default(USER)
   type           Type      @default(BUYER)
   accounts       Account[]
+  product        Product[]
+}
+
+model Product {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String  @db.ObjectId
+  name        String
+  description String
+  price       Float
+  category    String
+  approved    Boolean @default(false)
+  image       Image[]
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+type Image {
+  name      String
+  url       String @default("/media")
+  dir       String @default("media")
+  mimeTypes String @default("image/*")
 }
 
 enum Type {

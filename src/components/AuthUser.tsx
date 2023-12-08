@@ -16,7 +16,6 @@ const AuthUser = () => {
   const { data: session } = useSession();
 
   const user = session?.user as User;
-  console.log("user", user);
 
   return (
     <>
